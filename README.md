@@ -39,5 +39,5 @@ $ roscd && cd .. && catkin_make
 **Contact**: [Nadia Figueroa](http://lasa.epfl.ch/people/member.php?SCIPER=238387) (nadia.figueroafernandez AT epfl dot ch)
 
 **Acknowledgments**
-This work was supported by the European Communitys Horizon 2020 Research and Innovation pro-
-gramme ICT-23-2014, grant agreement 644727-[Cogimon](https://cogimon.eu/cognitive-interaction-motion-cogimon).
+This work was supported by the European Community Horizon 2020 Research and Innovation pro-
+gramme, grant agreement 644727-[Cogimon](https://cogimon.eu/cognitive-interaction-motion-cogimon).
