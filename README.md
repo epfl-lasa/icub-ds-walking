@@ -20,6 +20,7 @@ $ git clone -b nadia https://github.com/epfl-lasa/icub-ds-walking
 ```
 $  wstool init
 $  wstool merge icub-ds-walking/dependencies.rosinstall 
+$  wstool merge ds_motion_generator/dependencies.rosinstall 
 $  wstool up 
 ```
 * Query and installs all libraries and packages 
