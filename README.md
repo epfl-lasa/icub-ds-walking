@@ -1,10 +1,10 @@
-# icub-ds-walking
+## icub-ds-walking
+DS-based motion planning for the quickie-salsa wheelchair simulated in Gazebo, as shown below:
 
-
-## System Requirements
+### System Requirements
 Ubuntu 16.04, Gazebo7, ROS-Kinetic, YARP
 
-## Installation
+### Installation
 1. To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installation. Then, follow the instructions in the [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller) to install Gazebo7/YARP/iCub/gazebo-yarp-plugin etc. Run the test example to check that everything is working properly.
 
 2. Then install ``ros-kinetic-desktop`` which includes ROS, rqt, rviz, and robot-generic libraries only.
