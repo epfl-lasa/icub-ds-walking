@@ -27,7 +27,10 @@ $  wstool up
 ```
 $ rosdep install --from-paths . --ignore-src --rosdistro kinetic 
 ```
-
+* Compile all ros-packages
+```
+$ roscd && cd .. && catkin_make
+```
 
 **References**     
 > [1] Bombile, M. and Billard, A. (2017) Capture-Point based Balance and Reactive Omnidirectional Walking Controller. In proceedings of the IEEE-RAS Conference on Humanoid Robots (Humanoids), Birmigham (UK), Nov 15-17, 2017  
