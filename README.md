@@ -5,7 +5,9 @@ DS-based motion planning for the iCub using the reactive omnidirectional walking
 Ubuntu 16.04, Gazebo7, ROS-Kinetic, YARP
 
 ### Installation
-1. To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installation. Then, follow the instructions in the [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller) to install Gazebo7/YARP/iCub/gazebo-yarp-plugin etc. Run the test example to check that everything is working properly.
+To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installation. 
+
+1. follow the instructions in the [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller) to install Gazebo7/YARP/iCub/gazebo-yarp-plugin etc. Run the test example to check that everything is working properly.
 
 2. Install ``ros-kinetic-desktop`` which includes ROS, rqt, rviz, and robot-generic libraries only.
 
