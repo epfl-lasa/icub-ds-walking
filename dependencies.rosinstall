@@ -1,4 +1,4 @@
 - git:
     local-name: ds_motion_generator
     uri: https://github.com/epfl-lasa/ds_motion_generator.git
-version: nadia
+    version: nadia
