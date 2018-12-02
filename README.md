@@ -28,9 +28,9 @@ $ rosdep install --from-paths . --ignore-src --rosdistro kinetic
 
 
 **References**     
-> [1] Bombile, M. and Billard, A. (2017) Capture-Point based Balance and Reactive Omnidirectional Walking Controller. In proceedings of the IEEE-RAS Internatioanl Conference on Humanoid Robots (Humanoids), Birmigham (UK), Nov 15-17, 2017  
+> [1] Bombile, M. and Billard, A. (2017) Capture-Point based Balance and Reactive Omnidirectional Walking Controller. In proceedings of the IEEE-RAS Conference on Humanoid Robots (Humanoids), Birmigham (UK), Nov 15-17, 2017  
 > [2] Figueroa, N. and Billard, A. (2018) A Physically-Consistent Bayesian Non-Parametric Mixture Model for Dynamical System Learning. In Proceedings of the 2nd Conference on Robot Learning (CoRL).     
-> [3] Figueroa, N and Billard, A. "Locally Active Globally Stable Dynamical Systems: Theory, Learning and Experiments". In Preparation 
+> [3] Figueroa, N and Billard, A. (2019) "Locally Active Globally Stable Dynamical Systems: Theory, Learning and Experiments". In Preparation. 
 
 **Contact**: [Nadia Figueroa](http://lasa.epfl.ch/people/member.php?SCIPER=238387) (nadia.figueroafernandez AT epfl dot ch)
 
