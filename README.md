@@ -12,23 +12,23 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
 2. Install ``ros-kinetic-desktop`` which includes ROS, rqt, rviz, and robot-generic libraries only.
 
 3. In your catkin src directory clone the repository
-```
+```bash
 $ git clone -b nadia https://github.com/epfl-lasa/icub-ds-walking
 ```
 * wstool gets all other git repository dependencies, after the following steps you should see extra catkin 
   packages in your src directory.
-```
+```bash
 $  wstool init
 $  wstool merge icub-ds-walking/dependencies.rosinstall 
 $  wstool merge ds_motion_generator/dependencies.rosinstall 
 $  wstool up 
 ```
 * Query and installs all libraries and packages 
-```
+```bash
 $ rosdep install --from-paths . --ignore-src --rosdistro kinetic 
 ```
 * Compile all ros-packages
-```
+```bash
 $ roscd && cd .. && catkin_make
 ```
 
