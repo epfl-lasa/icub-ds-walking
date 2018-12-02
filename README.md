@@ -1,5 +1,5 @@
 ## icub-ds-walking
-DS-based motion planning for the quickie-salsa wheelchair simulated in Gazebo, as shown below:
+DS-based motion planning for the iCub using the reactive omnidirectional walking controller proposed in [1] with DS learned from demonstrations with the LPV-DS approach [2] and the LAGS-DS approach [3].
 
 ### System Requirements
 Ubuntu 16.04, Gazebo7, ROS-Kinetic, YARP
