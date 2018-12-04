@@ -7,7 +7,8 @@ Ubuntu 16.04, Gazebo7, ROS-Kinetic, YARP
 ### Installation
 To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installation. 
 
-1. Follow the instructions in the [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller) package to install Gazebo7/YARP/iCub/gazebo-yarp-plugin etc. ***Run the test example to check that everything is working properly.***
+1. Follow the instructions in the [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller) package to install Gazebo7/YARP/iCub/gazebo-yarp-plugin etc.   
+***Run the test example to check that everything is working properly.***
 
 2. Install ``ros-kinetic-desktop`` which includes ROS, rqt, rviz, and robot-generic libraries only.
 
