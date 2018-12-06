@@ -20,19 +20,20 @@ yarp2ros_data_publisher::yarp2ros_data_publisher(ros::NodeHandle &n, double freq
 
 
 	// Opening Ports and establish connection
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //-----------
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     CoMPose_port_In.open("/CoMPose_readPort");
 
     // remote port (on the robot side)
     //--------------------------------
     std::string CoM_portName="/";
 	            CoM_portName += robot_name;
-	            CoM_portName += "/CoMPose/analog:o";
+	            CoM_portName += "/CoMPose:o";
+   // std::string CoM_portName = "/icubSim/CoMPose:o";
 
 	// connection to the ports
-	// ------------------------
-	Network::connect(CoM_portName.c_str(),	 CoMPose_port_In.getName().c_str());
+    if(!Network::connect(CoM_portName.c_str(),	 CoMPose_port_In.getName().c_str())){
+        printf(" Unable to connect to the icubSim - CoMPose port");
+    }
        
 	// Reading of all ports and initilize vectors of data
 	CoMPose_values  	= CoMPose_port_In.read();

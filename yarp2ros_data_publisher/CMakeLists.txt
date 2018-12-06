@@ -109,12 +109,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-# catkin_package(
-# INCLUDE_DIRS include
-#  LIBRARIES yarp2ros_data_publisher
-#  CATKIN_DEPENDS cartesian_state_msgs geometry_msgs roscpp std_msgs tf tf_conversions yarp
-#  DEPENDS system_lib
-#)
+catkin_package(
+   INCLUDE_DIRS include
+   LIBRARIES yarp2ros_data_publisher
+   CATKIN_DEPENDS geometry_msgs roscpp std_msgs tf tf_conversions
+#   DEPENDS system_lib
+)
 
 
 ###########
@@ -155,16 +155,14 @@ include_directories(
 
 
 
-
-
-
 set(SRC_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(HEADERS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}")
 
 set(HEADERS    ${HEADERS_FOLDER}/yarp2ros_data_publisher.h)
+set(SOURCES    ${SRC_FOLDER}/yarp2ros_data_publisher.cpp)
 
-set(SOURCES    ${SRC_FOLDER}/yarp2ros_data_publisher.cpp
-			   yarp2ros_data_publisher_node.cpp)
+add_library(yarp2ros_data_publisher ${HEADERS} ${SOURCES})
+target_link_libraries(yarp2ros_data_publisher ${catkin_LIBRARIES} ${YARP_LIBRARIES})
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${catkin_INCLUDE_DIRS})
@@ -172,12 +170,15 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 include_directories(${YARP_INCLUDE_DIRS})
 
 
-add_executable(${PROJECT_NAME}_node ${SOURCES} ${HEADERS})
-               
+add_executable(yarp2ros_CoM_node ${SRC_FOLDER}/yarp2ros_data_publisher_node.cpp ${HEADERS})              
+target_link_libraries(yarp2ros_CoM_node yarp2ros_data_publisher ${catkin_LIBRARIES} ${YARP_LIBRARIES})
 
-## Specify libraries to link a library or executable target against
 
-target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES}  ${YARP_LIBRARIES})
+### ADD Nodes that use the library
+add_dependencies(yarp2ros_CoM_node 
+	${${PROJECT_NAME}_EXPORTED_TARGETS} 
+	${catkin_EXPORTED_TARGETS}
+${PROJECT_NAME}_gencfg)
 
 #############
 ## Install ##
