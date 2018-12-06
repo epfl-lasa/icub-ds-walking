@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<launch>
+  <!-- Launch file for the admittance controller -->
+
+  <!-- Main settings -->
+
+  <!-- NAME OF THE ROS TO YARP DATA STREAMER MODULE -->
+  <arg name="MODULE_NAME"   default="MocapWorldDataStreamer" />
+
+  <!-- Input topic related to the object pose -->
+  <arg name="TOPIC_CURRENT_OBJECT_POSE_WORLD"   default="/ur5/ur5_cartesian_velocity_controller_sim/ee_state"         />
+  <arg name="TOPIC_DESIRED_OBJECT_POSE_WORLD"   default="/ur5/ur5_cartesian_velocity_controller_sim/command_cart_vel" />
+
+  <!-- Input topics related to poses info of the wheeled mobile manipulator --> 
+  <arg name="TOPIC_WHEELED_ROBOT_ENDEFFECTOR_POSE_WORLD"  default="/odometry/filtered" />
+  <arg name="TOPIC_WHEELED_ROBOT_PLATFORM_POSE_WORLD"     default="/cmd_vel"           />
+  <arg name="TOPIC_MID_PC_POSE_MOCAP_WORLD"               default="/cmd_vel"           />
+
+  <!-- Input topics related to poses info of the humanoid robote manipulator --> 
+  <arg name="TOPIC_HUMANOID_BASE_POSE_WORLD"              default="/odometry/filtered" />
+  <arg name="TOPIC_HUMANOID_LHAND_ENDEFFECTOR_WORLD"      default="/cmd_vel"           />
+  <arg name="TOPIC_HUMANOID_RHAND_ENDEFFECTOR_WORLD"      default="/cmd_vel"           />
+
+  <!-- Topics to publish the Object references velocit=y and acceleration --> 
+  <arg name="TOPIC_REFERENCE_OBJECT_TWIST_WORLD"          default="/odometry/filtered" />
+  <arg name="TOPIC_REFERENCE_OBJECT_ACCELERATION_WORLD"   default="/cmd_vel"           />
+
+
+  <!-- Loading the ros2yarp_data_streamer parameters from a yaml file -->
+  <!-- <arg name="ROS2YARPDATASTREAM_PARAMS_FILE" default="$(find ros2yarp_data_streamer)/config/ros2yarpdatastreamer_params.yaml" /> -->
+ 
+  <group ns="admittance_control">
+    <!-- Converting args into params -->
+    <param name="module_name"                                 value="$(arg MODULE_NAME)"                                  />
+    <param name="topic_current_object_pose_world"             value="$(arg TOPIC_CURRENT_OBJECT_POSE_WORLD)"              />
+    <param name="topic_desired_object_pose_world"             value="$(arg TOPIC_DESIRED_OBJECT_POSE_WORLD)"              />
+    <param name="topic_wheeled_robot_endeffector_pose_world"  value="$(arg TOPIC_WHEELED_ROBOT_ENDEFFECTOR_POSE_WORLD)"   />
+    <param name="topic_wheeled_robot_platform_pose_world"     value="$(arg TOPIC_WHEELED_ROBOT_PLATFORM_POSE_WORLD)"      />
+    <param name="topic_mid_pc_pose_mocap_world"               value="$(arg TOPIC_MID_PC_POSE_MOCAP_WORLD)"                />
+    <param name="topic_humanoid_base_pose_world"              value="$(arg TOPIC_HUMANOID_BASE_POSE_WORLD)"               />
+    <param name="topic_humanoid_lhand_endeffector_world"      value="$(arg TOPIC_HUMANOID_LHAND_ENDEFFECTOR_WORLD)"       />
+    <param name="topic_humanoid_rhand_endeffector_world"      value="$(arg TOPIC_HUMANOID_RHAND_ENDEFFECTOR_WORLD)"       />
+    <param name="topic_reference_object_twist_world"          value="$(arg TOPIC_REFERENCE_OBJECT_TWIST_WORLD)"           />
+    <param name="topic_reference_object_acceleration_world"   value="$(arg TOPIC_REFERENCE_OBJECT_ACCELERATION_WORLD)"    />
+
+    <!-- <rosparam file="$(arg ROS2YARPDATASTREAM_PARAMS_FILE)" command="load"/> -->
+
+    <node name="ros_to_yarp_DataStreamer" pkg="ros2yarp_data_streamer" type="ros2yarp_data_streamer_node" output="screen"/>
+
+</group>
+
+
+</launch>
