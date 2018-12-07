@@ -63,16 +63,16 @@ $ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
 ```bash
 $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
 ```
-- Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini
+- Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
 
 #### Testing different walking commands
 We currently have 2 different ways of generating desired CoM velocity (v<sub>x</sub>, v<sub>y</sub>, w<sub>z</sub>). These types and their parameters can be defined in the config file: ``BalanceWalkingController_ROS.ini`` like so,
 ```
-# DS Type 0: Fixed initial velocity, 1: Using a linear DS from ROS
+# DS Type 0: Simple linear DS, 1: Using a non-linear DS from ROS
 DSType		0
 ```
- 1. Desired Velocity will be generated via a simple linear DS: ``DSType		0``   
- The implemented DS is of the form <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/linear_DS.gif"> whose parameters can be defined as follows:
+1. Desired Velocity will be generated via a simple linear DS: ``DSType		0``   
+The implemented DS is of the form <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/linear_DS.gif"> whose parameters can be defined as follows:
   ```
     # Desired Target with linear DS x [m], y [m], z [m] 
     kappa      0.2
