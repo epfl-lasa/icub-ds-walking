@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from geometry_msgs.msg import Pose2D, Pose, PoseStamped
 from geometry_msgs.msg import Quaternion
+# from tf.transformations import euler_from_quaternion
 from std_msgs.msg import Header, ColorRGBA
 from visualization_msgs.msg import Marker
 import math
@@ -24,16 +25,15 @@ class ObjectViz(object):
 
 
     def callback(self, msg):
-
-
-
         x = msg.pose.position.x
         y = msg.pose.position.y 
-        quat_robot = [msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z, msg.pose.orientation.w]
-        quat_msg   = Quaternion(quat_robot[0], quat_robot[1], quat_robot[2], quat_robot[3])
+        z = msg.pose.position.z 
+        q_x = msg.pose.orientation.x
+        q_y = msg.pose.orientation.y
+        q_z = msg.pose.orientation.z
+        q_w = msg.pose.orientation.w
 
-        theta = 0
-        self._robot_pose = [x,y,theta];
+        self._robot_pose = [x,y,z,q_x,q_y,q_z,q_w];
         self.viz_cube()
         self.pub_pose()
 
@@ -42,17 +42,20 @@ class ObjectViz(object):
        marker.header.frame_id = "/gazebo_world"
        marker.type = marker.CUBE
        marker.action = marker.ADD
-       marker.scale.x = 0.78
-       marker.scale.y = 0.66
+       marker.scale.x = 0.15
+       marker.scale.y = 0.30
        marker.scale.z = 1.0
        marker.color.a = 1.0
        marker.color.r = 0.5
        marker.color.g = 0.5
-       marker.color.b = 0.5
-       marker.pose.orientation.w = 1.0
+       marker.color.b = 0.5       
        marker.pose.position.x = self._robot_pose[0]
        marker.pose.position.y = self._robot_pose[1]
-       marker.pose.position.z = 0.5
+       marker.pose.position.z = self._robot_pose[2]
+       marker.pose.orientation.x = self._robot_pose[3]
+       marker.pose.orientation.y = self._robot_pose[4]
+       marker.pose.orientation.z = self._robot_pose[5]
+       marker.pose.orientation.w = self._robot_pose[6]
        self._marker_pub.publish(marker)
     
     def pub_pose(self):
