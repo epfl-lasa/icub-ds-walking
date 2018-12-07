@@ -24,24 +24,76 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
 2. Install ``ros-kinetic-desktop`` which includes ROS, rqt, rviz, and robot-generic libraries only.
 
 3. In your catkin src directory clone the repository
+   ```bash
+      $ git clone -b nadia https://github.com/epfl-lasa/icub-ds-walking
+   ```
+   * wstool gets all other git repository dependencies, after the following steps you should see extra catkin 
+   packages in your src directory.
+   ```bash
+      $  wstool init
+      $  wstool merge icub-ds-walking/dependencies.rosinstall && wstool up 
+      $  wstool merge ds_motion_generator/dependencies.rosinstall && wstool up 
+   ```
+   * Query and installs all libraries and packages 
+   ```bash
+      $ rosdep install --from-paths . --ignore-src --rosdistro kinetic 
+   ```
+   * Compile all ros-packages
+   ```bash
+      $ roscd && cd .. && catkin_make
+   ```
+### Usage
+- **Terminal 1** Start yarpserver:
 ```bash
-$ git clone -b nadia https://github.com/epfl-lasa/icub-ds-walking
+$ yarpserver
 ```
-* wstool gets all other git repository dependencies, after the following steps you should see extra catkin 
-  packages in your src directory.
+- **Terminal 2** (simulation) start gazebo simulator and import include the robot model (`iCub (no hands)`)
 ```bash
-$  wstool init
-$  wstool merge icub-ds-walking/dependencies.rosinstall && wstool up 
-$  wstool merge ds_motion_generator/dependencies.rosinstall && wstool up 
+$ gazebo 
 ```
-* Query and installs all libraries and packages 
+- **Terminal 3** Launch roscore: 
 ```bash
-$ rosdep install --from-paths . --ignore-src --rosdistro kinetic 
+$ roscore
 ```
-* Compile all ros-packages
+- **Terminal 4** In another terminal launch the walking controller as follows : 
 ```bash
-$ roscd && cd .. && catkin_make
+$ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
 ```
+- **Terminal 5** Load Desired DS and robot/DS visualization in RViz:
+```bash
+$ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
+```
+- Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini
+
+#### Testing different walking commands
+We currently have 2 different ways of generating desired CoM velocity (v<sub>x</sub>, v<sub>y</sub>, w<sub>z</sub>). These types and their parameters can be defined in the config file: ``BalanceWalkingController_ROS.ini`` like so,
+```
+# DS Type 0: Fixed initial velocity, 1: Using a linear DS from ROS
+DSType		0
+```
+ 1. Desired Velocity will be generated via a simple linear DS: ``DSType		0``   
+ The implemented DS is of the form <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/linear_DS.gif"> whose parameters can be defined as follows:
+  ```
+    # Desired Target with linear DS x [m], y [m], z [m] 
+    kappa      0.2
+    AttractorX 2.00
+    AttractorY -1.00
+    AttractorZ 0.541591
+  ```  
+   where:
+    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/CoM.gif">: CoM position
+    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/attractor.gif">: Attractor (target)
+    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/kappa.gif">: DS gain     
+
+   The angular velocity <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_z.gif"> is defined with the following equation: <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_eq.gif">, where:  
+    
+   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif">:  Current Rotation matrix of the robot's CoM in world reference frame  
+   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R_d.gif">: Desired Rotation matrix of the robot's CoM in world reference frame, computed by aligning R with the direction of motion given by the DS <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/ds_dir.gif">  
+   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_skew.gif">: The skew-symmetric matrix representing the angular velocity vector <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega.gif">  
+
+2. Desired Velocity will be generated via a non-linear DS learned from demonstrations: ``DSType		1``. The paramaters of this DS should be defined in.. launch file
+
+---
 
 **References**     
 > [1] Bombile, M. and Billard, A. (2017) Capture-Point based Balance and Reactive Omnidirectional Walking Controller. In proceedings of the IEEE-RAS Conference on Humanoid Robots (Humanoids), Birmigham (UK), Nov 15-17, 2017  
