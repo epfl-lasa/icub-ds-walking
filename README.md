@@ -10,7 +10,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
 1. Follow the instructions in the [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller) package to install Gazebo7/YARP/iCub/gazebo-yarp-plugin etc. Use the easy installation:
 
     **Easiest option (on clean installation):**
-    - Install latest version of[Eigen3](): Eigen 3 version >=3.2.9 
+    - Install latest version of [Eigen3](): Eigen 3 version >=3.2.9 
     - Install Gazebo7 and libgazebo7: [installation instructions](http://gazebosim.org/tutorials?cat=install&tut=install_ubuntu&ver=7.0) 
     - Install all yarp/iCub/gazebo-plugin libraries with [robotology-superbuild](https://github.com/robotology/robotology-superbuild)
     - Install the Gazebo Plugin [GetLinkWorldPose](https://github.com/epfl-lasa/GetLinkWorldPose.git)
