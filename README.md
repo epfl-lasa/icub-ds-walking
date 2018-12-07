@@ -44,26 +44,26 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```
 ### Usage
 - **Terminal 1** Start yarpserver:
-```bash
-$ yarpserver
-```
+   ```bash
+      $ yarpserver
+   ```
 - **Terminal 2** (simulation) start gazebo simulator and import include the robot model (`iCub (no hands)`)
-```bash
-$ gazebo 
-```
+   ```bash
+      $ gazebo 
+   ```
 - **Terminal 3** Launch roscore: 
-```bash
-$ roscore
-```
+   ```bash
+      $ roscore
+   ```
 - **Terminal 4** In another terminal launch the walking controller as follows : 
-```bash
-$ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
-```
+   ```bash
+      $ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
+   ```
 - **Terminal 5** Load Desired DS and robot/DS visualization in RViz:
-```bash
-$ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
-```
-- Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
+   ```bash
+      $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
+   ```
+   - Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
 
 #### Testing different walking commands
 We currently have 2 different ways of generating desired CoM velocity (v<sub>x</sub>, v<sub>y</sub>, w<sub>z</sub>). These types and their parameters can be defined in the config file: ``BalanceWalkingController_ROS.ini`` like so,
