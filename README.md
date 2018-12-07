@@ -11,14 +11,14 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```bash
       $ git clone -b nadia-DS https://github.com/epfl-lasa/biped-walking-controller.git
    ```
-   Install all dependencies (follow README):
+   - Install all dependencies (follow README):
        **Easiest option (on clean installation):**
       - Install latest version of [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page): Eigen 3 version >=3.2.9 
       - Install Gazebo7 and libgazebo7: [installation instructions](http://gazebosim.org/tutorials?cat=install&tut=install_ubuntu&ver=7.0) 
       - Install all yarp/iCub/gazebo-plugin libraries with [robotology-superbuild](https://github.com/robotology/robotology-superbuild)
       - Install the Gazebo Plugin [GetLinkWorldPose](https://github.com/epfl-lasa/GetLinkWorldPose.git)
 
-  ***Run the test with different walking commands to check that everything is working properly.***
+   - ***Run the tests with different walking commands to check that everything is working properly.***
 
 2. Install ``ros-kinetic-desktop`` which includes ROS, rqt, rviz, and robot-generic libraries only.
 
