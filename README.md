@@ -7,12 +7,12 @@ Ubuntu 16.04, Gazebo7, ROS-Kinetic, YARP
 ### Installation
 To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installation. 
 
-1. Install  [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller/tree/nadia-DS) package to install Gazebo7/YARP/iCub/gazebo-yarp-plugin etc.
+1. Install  [biped-walking-controller](https://github.com/epfl-lasa/biped-walking-controller/tree/nadia-DS) package.
    - Checkout/clone the ``nadia-DS`` branch!
    ```bash
       $ git clone -b nadia-DS https://github.com/epfl-lasa/biped-walking-controller.git
    ```
-   - Install all dependencies (follow README):
+   - Install all dependencies Gazebo7/YARP/iCub/gazebo-yarp-plugin etc (follow README):
        **Easiest option (on clean installation):**
       - Install latest version of [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page): Eigen 3 version >=3.2.9 
       - Install Gazebo7 and libgazebo7: [installation instructions](http://gazebosim.org/tutorials?cat=install&tut=install_ubuntu&ver=7.0) 
