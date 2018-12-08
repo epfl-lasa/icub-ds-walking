@@ -31,7 +31,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    packages in your src directory.
    ```bash
       $  wstool init
-      $  wstool merge icub-ds-walking/dependencies.rosinstall && wstool up 
+      $  wstool merge icub-ds-walking/icub-ds-motion/dependencies.rosinstall && wstool up 
       $  wstool merge ds_motion_generator/dependencies.rosinstall && wstool up 
    ```
    * Query and installs all libraries and packages 
