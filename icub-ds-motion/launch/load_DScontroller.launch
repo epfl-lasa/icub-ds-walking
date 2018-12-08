@@ -11,7 +11,7 @@
 	# Example Options:
   	# - iCub-Line-Loco
   	# - iCub-Linear-Loco
-  	# - iCub-C-Loco
+  	# - iCub-Cshape-Loco
 
 
   	# Load ros2yarp streamer
