@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from geometry_msgs.msg import Pose2D, Pose, PoseStamped
 from geometry_msgs.msg import Quaternion
-# from tf.transformations import euler_from_quaternion
 from std_msgs.msg import Header, ColorRGBA
 from visualization_msgs.msg import Marker
 import math
@@ -62,11 +61,11 @@ class ObjectViz(object):
       robot = Pose()
       robot.position.x = self._robot_pose[0]
       robot.position.y = self._robot_pose[1]
-      robot.position.z = 0.0
-      robot.orientation.x = 0
-      robot.orientation.y = 0
-      robot.orientation.z = 0
-      robot.orientation.w = 1
+      robot.position.z = self._robot_pose[2]
+      robot.orientation.x = self._robot_pose[3]
+      robot.orientation.y = self._robot_pose[4]
+      robot.orientation.z = self._robot_pose[5]
+      robot.orientation.w = self._robot_pose[6]
       self._robot_pub.publish(robot)
 
     def shutdown(self):

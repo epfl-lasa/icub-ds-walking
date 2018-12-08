@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from geometry_msgs.msg import Pose2D, Point, Vector3
+from geometry_msgs.msg import Pose2D, Point, Vector3, PoseStamped
 from std_msgs.msg import Header, ColorRGBA
 from visualization_msgs.msg import Marker
 import math
@@ -24,14 +24,15 @@ def distance(p1, p2):
 
 
 class TaskTrajectory(object):
-    DISTANCE_THRESHOLD = 0.02    
+    DISTANCE_THRESHOLD = 0.01    
     def __init__(self, marker_pub):
         self._trajectory = []
         self._marker_pub = marker_pub
         rospy.on_shutdown(self.shutdown)
 
     def callback(self, msg):
-        point = Point(msg.x, msg.y, 0.25)
+
+        point = Point(msg.pose.position.x, msg.pose.position.y, msg.pose.position.z)
 
         if (len(self._trajectory) == 0 or
                 distance(self._trajectory[-1], point) > TaskTrajectory.DISTANCE_THRESHOLD):
@@ -39,24 +40,13 @@ class TaskTrajectory(object):
             # self.viz_breadcrumb()
             self.viz_path()
 
-    # def viz_breadcrumb(self):
-    #     msg = Marker(
-    #         type=Marker.SPHERE_LIST,
-    #         ns='breadcrumb',
-    #         id=len(self._trajectory),
-    #         points=self._trajectory,
-    #         scale=Vector3(0.01, 0.01, 0.01),
-    #         header=Header(frame_id='gazebo_world'),
-    #         color=ColorRGBA(1.0, 0.0, 0.0, 0.0))
-    #     self._marker_pub.publish(msg)
-
     def viz_path(self):
         msg = Marker(
             type=Marker.LINE_STRIP,
             ns='path',
             id=len(self._trajectory),
             points=self._trajectory,
-            scale=Vector3(0.1, 0.1, 0.1),
+            scale=Vector3(0.05, 0.05, 0.05),
             header=Header(frame_id='gazebo_world'),
             color=ColorRGBA(1.0, 0.0, 0.0, 1.0))
         self._marker_pub.publish(msg)
@@ -74,8 +64,7 @@ def main():
     marker_publisher = rospy.Publisher(
         'trajectory_marker', Marker, queue_size=5)
     trajectory = TaskTrajectory(marker_publisher)
-    rospy.Subscriber('/Read_joint_state/quickie_state', Pose2D, trajectory.callback)
-
+    rospy.Subscriber('/icubSim_CoM_pose', PoseStamped, trajectory.callback)
     rospy.spin()
 
     rospy.loginfo('Running until shutdown (Ctrl-C).')

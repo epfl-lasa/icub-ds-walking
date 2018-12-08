@@ -12,7 +12,7 @@ Panels:
         - /Marker2/Namespaces1
         - /Path3
       Splitter Ratio: 0.5
-    Tree Height: 296
+    Tree Height: 359
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -66,7 +66,7 @@ Visualization Manager:
       Marker Topic: /trajectory_marker
       Name: Marker
       Namespaces:
-        {}
+        path: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -183,25 +183,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 13.5201797
+      Distance: 10.4700279
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 5.16543007
-        Y: -1.84972
+        X: 4.08047056
+        Y: -1.84556675
         Z: -3.26769996
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.53979635
+      Pitch: 1.56979632
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.70357943
+      Yaw: 4.70858192
     Saved: ~
 Window Geometry:
   Displays:
@@ -219,5 +219,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 667
-  X: 393
-  Y: 360
+  X: 1101
+  Y: 442
