@@ -6,9 +6,9 @@
 #include <iomanip>
 
 #include "ros/ros.h"
-#include "cartesian_state_msgs/PoseTwist.h"
 #include "geometry_msgs/WrenchStamped.h"
 #include "geometry_msgs/Twist.h"
+#include "geometry_msgs/TwistStamped.h"
 #include "geometry_msgs/PoseStamped.h"
 #include "std_msgs/String.h"
 
@@ -122,6 +122,10 @@ class ros2yarp_data_streamer
 
 		yarp::sig::Vector reference_ObjectTwist;
 		yarp::sig::Vector reference_ObjectAccel;
+
+			// 
+		std::string Ref_ObjectTwistPortName	;
+		std::string Ref_ObjectAccelPortName ;
 
 
 		// Positions and orientations

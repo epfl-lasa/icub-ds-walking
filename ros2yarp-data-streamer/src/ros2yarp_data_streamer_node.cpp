@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "ros2yarp_data_streamer_node");
 
 	ros::NodeHandle nh;
-	double frequency = 100.0;
+	double frequency = 125.0;
 
 	// Parameters
 	std::string module_name;

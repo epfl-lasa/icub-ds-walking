@@ -245,65 +245,81 @@ void ros2yarp_data_streamer::humanoid_rhand_endeffector_world_callback(const geo
 
 
 // get pose with Axis Angle
-
+// There's something wrong here!
 bool ros2yarp_data_streamer::get_pose_with_axis_angle()
 {
 	//	
-    CurrentObjectPose.setSubvector(0, CurObjectPosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_CurObjectOrienation);
-    CurrentObjectPose[3] = CurObjectOrienation.axis()(0);
-    CurrentObjectPose[4] = CurObjectOrienation.axis()(1);
-    CurrentObjectPose[5] = CurObjectOrienation.axis()(2);
-    CurrentObjectPose[6] = CurObjectOrienation.angle();
+    CurrentObjectPose[0] = CurObjectPosition(0);
+    CurrentObjectPose[1] = CurObjectPosition(1);
+    CurrentObjectPose[2] = CurObjectPosition(2);
+    Eigen::AngleAxisd CurObjectOrienation_(quat_CurObjectOrienation);
+    CurrentObjectPose[3] = CurObjectOrienation_.axis()(0);
+    CurrentObjectPose[4] = CurObjectOrienation_.axis()(1);
+    CurrentObjectPose[5] = CurObjectOrienation_.axis()(2);
+    CurrentObjectPose[6] = CurObjectOrienation_.angle();
     //	
-    DesiredObjectPose.setSubvector(0, DesObjectPosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_DesObjectOrienation);
-    DesiredObjectPose[3] = CurObjectOrienation.axis()(0);
-    DesiredObjectPose[4] = CurObjectOrienation.axis()(1);
-    DesiredObjectPose[5] = CurObjectOrienation.axis()(2);
-    DesiredObjectPose[6] = CurObjectOrienation.angle();
+    DesiredObjectPose[0] = DesObjectPosition(0);
+    DesiredObjectPose[1] = DesObjectPosition(1);
+    DesiredObjectPose[2] = DesObjectPosition(2);
+    Eigen::AngleAxisd DeSObjectOrienation_(quat_DesObjectOrienation);
+    DesiredObjectPose[3] = DeSObjectOrienation_.axis()(0);
+    DesiredObjectPose[4] = DeSObjectOrienation_.axis()(1);
+    DesiredObjectPose[5] = DeSObjectOrienation_.axis()(2);
+    DesiredObjectPose[6] = DeSObjectOrienation_.angle();
     //	
-    WheeledRobotEndEffectorPose.setSubvector(0, WRobotEndEffPosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_WRobotEndEffOrienation);
-    WheeledRobotEndEffectorPose[3] = WRobotEndEffOrienation.axis()(0);
-    WheeledRobotEndEffectorPose[4] = WRobotEndEffOrienation.axis()(1);
-    WheeledRobotEndEffectorPose[5] = WRobotEndEffOrienation.axis()(2);
-    WheeledRobotEndEffectorPose[6] = WRobotEndEffOrienation.angle();
+    WheeledRobotEndEffectorPose[0] = WRobotEndEffPosition(0);
+    WheeledRobotEndEffectorPose[1] = WRobotEndEffPosition(1);
+    WheeledRobotEndEffectorPose[2] = WRobotEndEffPosition(2);
+    Eigen::AngleAxisd WRobotEndEffOrienation_(quat_WRobotEndEffOrienation);
+    WheeledRobotEndEffectorPose[3] = WRobotEndEffOrienation_.axis()(0);
+    WheeledRobotEndEffectorPose[4] = WRobotEndEffOrienation_.axis()(1);
+    WheeledRobotEndEffectorPose[5] = WRobotEndEffOrienation_.axis()(2);
+    WheeledRobotEndEffectorPose[6] = WRobotEndEffOrienation_.angle();
+    //	    
+    WheeledRobotPlatformPose[0] = WRobotPlatformPosition(0);
+    WheeledRobotPlatformPose[1] = WRobotPlatformPosition(1);
+    WheeledRobotPlatformPose[2] = WRobotPlatformPosition(2);
+    Eigen::AngleAxisd WRobotPlatformOrienation_(quat_WRobotPlatformOrienation);
+    WheeledRobotPlatformPose[3] = WRobotPlatformOrienation_.axis()(0);
+    WheeledRobotPlatformPose[4] = WRobotPlatformOrienation_.axis()(1);
+    WheeledRobotPlatformPose[5] = WRobotPlatformOrienation_.axis()(2);
+    WheeledRobotPlatformPose[6] = WRobotPlatformOrienation_.angle();
+    //	   
+    WheeledRobotMidPcPose[0] = WRobotMidPcPosition(0);
+    WheeledRobotMidPcPose[1] = WRobotMidPcPosition(1);
+    WheeledRobotMidPcPose[2] = WRobotMidPcPosition(2);
+    Eigen::AngleAxisd WRobotMidPcOrienation_(quat_WRobotMidPcOrienation);
+    WheeledRobotMidPcPose[3] = WRobotMidPcOrienation_.axis()(0);
+    WheeledRobotMidPcPose[4] = WRobotMidPcOrienation_.axis()(1);
+    WheeledRobotMidPcPose[5] = WRobotMidPcOrienation_.axis()(2);
+    WheeledRobotMidPcPose[6] = WRobotMidPcOrienation_.angle();
     //	
-    WheeledRobotPlatformPose.setSubvector(0, WRobotPlatformPosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_WRobotPlatformOrienation);
-    WheeledRobotPlatformPose[3] = WRobotPlatformOrienation.axis()(0);
-    WheeledRobotPlatformPose[4] = WRobotPlatformOrienation.axis()(1);
-    WheeledRobotPlatformPose[5] = WRobotPlatformOrienation.axis()(2);
-    WheeledRobotPlatformPose[6] = WRobotPlatformOrienation.angle();
+    HumanoidRobotBasePose[0] = HRobotBasePosition(0);
+    HumanoidRobotBasePose[1] = HRobotBasePosition(1);
+    HumanoidRobotBasePose[2] = HRobotBasePosition(2);
+    Eigen::AngleAxisd HRobotBaseOrienation_(quat_HRobotBaseOrienation);
+    HumanoidRobotBasePose[3] = HRobotBaseOrienation_.axis()(0);
+    HumanoidRobotBasePose[4] = HRobotBaseOrienation_.axis()(1);
+    HumanoidRobotBasePose[5] = HRobotBaseOrienation_.axis()(2);
+    HumanoidRobotBasePose[6] = HRobotBaseOrienation_.angle();
     //	
-    WheeledRobotMidPcPose.setSubvector(0, WRobotMidPcPosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_WRobotMidPcOrienation);
-    WheeledRobotMidPcPose[3] = WRobotMidPcOrienation.axis()(0);
-    WheeledRobotMidPcPose[4] = WRobotMidPcOrienation.axis()(1);
-    WheeledRobotMidPcPose[5] = WRobotMidPcOrienation.axis()(2);
-    WheeledRobotMidPcPose[6] = WRobotMidPcOrienation.angle();
+    HumanoidRobotLHandPose[0] = HRobotLHandPosition(0);
+    HumanoidRobotLHandPose[1] = HRobotLHandPosition(1);
+    HumanoidRobotLHandPose[2] = HRobotLHandPosition(2);
+    Eigen::AngleAxisd HRobotLHandOrienation_(quat_HRobotLHandOrienation);
+    HumanoidRobotLHandPose[3] = HRobotLHandOrienation_.axis()(0);
+    HumanoidRobotLHandPose[4] = HRobotLHandOrienation_.axis()(1);
+    HumanoidRobotLHandPose[5] = HRobotLHandOrienation_.axis()(2);
+    HumanoidRobotLHandPose[6] = HRobotLHandOrienation_.angle();
     //	
-    HumanoidRobotBasePose.setSubvector(0, HRobotBasePosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_HRobotBaseOrienation);
-    HumanoidRobotBasePose[3] = HRobotBaseOrienation.axis()(0);
-    HumanoidRobotBasePose[4] = HRobotBaseOrienation.axis()(1);
-    HumanoidRobotBasePose[5] = HRobotBaseOrienation.axis()(2);
-    HumanoidRobotBasePose[6] = HRobotBaseOrienation.angle();
-    //	
-    HumanoidRobotLHandPose.setSubvector(0, HRobotLHandPosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_HRobotLHandOrienation);
-    HumanoidRobotLHandPose[3] = HRobotLHandOrienation.axis()(0);
-    HumanoidRobotLHandPose[4] = HRobotLHandOrienation.axis()(1);
-    HumanoidRobotLHandPose[5] = HRobotLHandOrienation.axis()(2);
-    HumanoidRobotLHandPose[6] = HRobotLHandOrienation.angle();
-    //	
-    HumanoidRobotRHandPose.setSubvector(0, HRobotRHandPosition);
-    Eigen::AngleAxisd CurObjectOrienation(quat_HRobotRHandOrienation);
-    HumanoidRobotRHandPose[3] = HRobotRHandOrienation.axis()(0);
-    HumanoidRobotRHandPose[4] = HRobotRHandOrienation.axis()(1);
-    HumanoidRobotRHandPose[5] = HRobotRHandOrienation.axis()(2);
-    HumanoidRobotRHandPose[6] = HRobotRHandOrienation.angle();
+    HumanoidRobotRHandPose[0] = HRobotRHandPosition(0);
+    HumanoidRobotRHandPose[1] = HRobotRHandPosition(1);
+    HumanoidRobotRHandPose[2] = HRobotRHandPosition(2);
+    Eigen::AngleAxisd HRobotRHandOrienation_(quat_HRobotRHandOrienation);
+    HumanoidRobotRHandPose[3] = HRobotRHandOrienation_.axis()(0);
+    HumanoidRobotRHandPose[4] = HRobotRHandOrienation_.axis()(1);
+    HumanoidRobotRHandPose[5] = HRobotRHandOrienation_.axis()(2);
+    HumanoidRobotRHandPose[6] = HRobotRHandOrienation_.angle();
 
 	return true;
 }
