@@ -9,27 +9,33 @@ using namespace yarp::os;
 // ------------------
 ros2yarp_DS_streamer::ros2yarp_DS_streamer(ros::NodeHandle &n, double frequency,
 												std::string robot_name,
-												std::string topic_desired_DS_CoM_velocity)	: nh_(n), loop_rate_(frequency)
+												std::string topic_desired_DS_CoM_velocity,
+												std::string topic_desired_DS_CoM_attractor)	: nh_(n), loop_rate_(frequency)
 																										, robot_name_(robot_name)
 																										, DesiredCoMVelocity_(3)
+																										, DesiredCoMAttractor_(2)
 {
 	// Subscribers
   	//	
 	sub_desired_DS_CoM_Velocity_ = nh_.subscribe(topic_desired_DS_CoM_velocity, 10,
                                    &ros2yarp_DS_streamer::desired_DS_CoM_velocity_callback, this,
                                    ros::TransportHints().reliable().tcpNoDelay());
+	sub_desired_DS_CoM_Attractor_ = nh_.subscribe(topic_desired_DS_CoM_attractor, 10,
+                                   &ros2yarp_DS_streamer::desired_DS_CoM_attractor_callback, this,
+                                   ros::TransportHints().reliable().tcpNoDelay());
 
-
-	// opening the port
-	// create the port names
+	// opening the ports
 	DesCoMVelocityPortName_ = "/" + robot_name_ + "/DesiredCoMVelocity:o";
+	DesCoMVelocityPort_.open(DesCoMVelocityPortName_.c_str());
 
 
 	// opening the ports
-	DesCoMVelocityPort_.open(DesCoMVelocityPortName_.c_str());
+	DesCoMAttractorPortName_ = "/" + robot_name_ + "/DesiredCoMAttractor:o";
+	DesCoMAttractorPort_.open(DesCoMAttractorPortName_.c_str());
 
 	// initilize the pose vectors to zero
 	DesiredCoMVelocity_ = 0.0;
+	DesiredCoMAttractor_ = 0.0;
 	
 }
 
@@ -57,6 +63,15 @@ void ros2yarp_DS_streamer::desired_DS_CoM_velocity_callback(const geometry_msgs:
 
 }
 
+void ros2yarp_DS_streamer::desired_DS_CoM_attractor_callback(const geometry_msgs::PointStampedConstPtr msg) 
+{
+	// position
+	DesiredCoMAttractor_[0] = msg->point.x;
+	DesiredCoMAttractor_[1] = msg->point.y;
+
+}
+
+
 //
 void ros2yarp_DS_streamer::run() 
 {
@@ -70,15 +85,17 @@ void ros2yarp_DS_streamer::run()
 
 		//
 		yarp::sig::Vector &output_DesCoMVelocity = DesCoMVelocityPort_.prepare();
+		yarp::sig::Vector &output_DesCoMAttractor = DesCoMAttractorPort_.prepare();
 
 		// assinging the pose values to the ports
 		// ---------------------------------------
 		output_DesCoMVelocity  		=	DesiredCoMVelocity_; 
+		output_DesCoMAttractor  		=	DesiredCoMAttractor_; 
 
 		// write the data to the port
 		// --------------------------
 		DesCoMVelocityPort_.write();
-
+		DesCoMAttractorPort_.write();
 
 		ros::spinOnce();
 		loop_rate_.sleep();
@@ -88,5 +105,6 @@ void ros2yarp_DS_streamer::run()
 	// Interrupt the streaming when exiting the loop
 	// --------------------------
 	DesCoMVelocityPort_.interrupt();
+	DesCoMAttractorPort_.interrupt();
 
 }

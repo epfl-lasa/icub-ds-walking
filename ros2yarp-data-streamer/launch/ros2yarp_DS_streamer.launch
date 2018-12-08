@@ -1,13 +1,15 @@
 <?xml version="1.0" ?>
 <launch>
   <!-- Launch file for DS controller -->
-  <arg name="ROBOT_NAME"                        default="icubSim" />
-  <arg name="TOPIC_DESIRED_DS_COM_VELOCITY"     default="/ds_cmd_vel"/>
+  <arg name="ROBOT_NAME"                         default="icubSim" />
+  <arg name="TOPIC_DESIRED_DS_COM_VELOCITY"      default="/ds_cmd_vel"/>
+  <arg name="TOPIC_DESIRED_DS_COM_ATTRACTOR"     default="/ds1/DS/target"/>
  
   <group ns="/icub">
     <!-- Converting args into params -->
     <param name="robot_name"                                value="$(arg ROBOT_NAME)"                        />
     <param name="topic_desired_DS_CoM_velocity"             value="$(arg TOPIC_DESIRED_DS_COM_VELOCITY)"     />
+    <param name="topic_desired_DS_CoM_attractor"             value="$(arg TOPIC_DESIRED_DS_COM_ATTRACTOR)"     />
     <node name="ros2yarp_DS_node" pkg="ros2yarp_data_streamer" type="ros2yarp_DS_node" output="screen"/>
   </group>
 

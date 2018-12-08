@@ -18,20 +18,27 @@ int main(int argc, char **argv)
 	// Parameters
 	std::string robot_name  = "icubSim";
 	std::string topic_desired_DS_CoM_velocity = "/ds_cmd_vel";
+	std::string topic_desired_DS_CoM_attractor = "/ds1/DS/target";
 
 
 	// LOADING PARAMETERS FROM THE ROS SERVER
 	// Module name
 	if (!nh.getParam("robot_name", robot_name)) {
 		ROS_ERROR("Couldn't retrieve the robot name of the ros to yarp data streamer.");
-		// return -1;
+		return -1;
 	}
 
 	// Topic names
 	// -------------
 	if (!nh.getParam("topic_desired_DS_CoM_velocity", topic_desired_DS_CoM_velocity)) {
 		ROS_ERROR("Couldn't retrieve the topic name for the desired CoM velocity from DS.");
-		// return -1;
+		return -1;
+	}
+
+	// -------------
+	if (!nh.getParam("topic_desired_DS_CoM_attractor", topic_desired_DS_CoM_attractor)) {
+		ROS_ERROR("Couldn't retrieve the topic name for the desired CoM attractor from DS.");
+		return -1;
 	}
 
 	// opening connecting to yarp network
@@ -44,7 +51,7 @@ int main(int argc, char **argv)
     }
 
 	// creating the streamer
-	ros2yarp_DS_streamer ros_to_yarp_DS_streamer(nh, frequency, robot_name, topic_desired_DS_CoM_velocity);
+	ros2yarp_DS_streamer ros_to_yarp_DS_streamer(nh, frequency, robot_name, topic_desired_DS_CoM_velocity, topic_desired_DS_CoM_attractor);
 
 
 	ros_to_yarp_DS_streamer.run();
