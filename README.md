@@ -51,7 +51,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```bash
       $ gazebo 
    ```
-- **Terminal 3** Launch roscore and visualization of CoM and DS in Rviz: (This could be in another PC)
+- **Terminal 3** Launch roscore and visualization of CoM and DS in Rviz (this could be in another PC): 
    ```bash
       $ roslaunch icub-ds-motion icub_visualization.launch
    ```
@@ -65,7 +65,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```
    - Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
    
-- **Terminal 6** Load the DS that you want the robot's CoM motion to follow:
+- **Terminal 6** Load the DS that you want the robot's CoM motion to follow (this could be in another PC):
    ```bash
       $ roslaunch icub-ds-motion load_DScontroller.launch 
    ```
