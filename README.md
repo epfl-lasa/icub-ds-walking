@@ -51,9 +51,9 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```bash
       $ gazebo 
    ```
-- **Terminal 3** Launch roscore and visualization of CoM and DS in Rviz: 
+- **Terminal 3** Launch roscore and visualization of CoM and DS in Rviz: (This could be in another PC)
    ```bash
-      $ roslaunch icub-ds-motion ds_visualization.launch
+      $ roslaunch icub-ds-motion icub_visualization.launch
    ```
 - **Terminal 4** Run the walking controller as follows : 
    ```bash
@@ -64,6 +64,23 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
       $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
    ```
    - Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
+   
+- **Terminal 5** Load the DS that you want the robot's CoM motion to follow:
+   ```bash
+      $ roslaunch icub-ds-motion load_DScontroller.launch 
+   ```
+   To define which DS you want to load you can modify the launch file:
+   ```xml
+   # Load DS Motion Generator
+	<include file="$(find icub-ds-motion)/launch/load_lpvDS_motionGenerator.launch">
+		<arg name="DS_name" value="iCub-Line-Loco"/>
+	</include>
+	# Example Options:
+  	# - iCub-Line-Loco
+  	# - iCub-Linear-Loco
+  	# - iCub-C-Loco
+   ```
+   These are the names of the ```.yml``` files that should be stored in this folder: ```~/ds_motion_generator/config/learned_DS/lpvDS/```.
 
 #### Testing different walking commands
 We currently have 2 different ways of generating desired CoM velocity (v<sub>x</sub>, v<sub>y</sub>, w<sub>z</sub>). These types and their parameters can be defined in the config file: ``BalanceWalkingController_ROS.ini`` like so,
