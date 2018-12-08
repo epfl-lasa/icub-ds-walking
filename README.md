@@ -51,15 +51,15 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```bash
       $ gazebo 
    ```
-- **Terminal 3** Launch roscore: 
+- **Terminal 3** Launch roscore and visualization of CoM and DS in Rviz: 
    ```bash
-      $ roscore
+      $ roslaunch icub-ds-motion ds_visualization.launch
    ```
-- **Terminal 4** In another terminal launch the walking controller as follows : 
+- **Terminal 4** Run the walking controller as follows : 
    ```bash
       $ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
    ```
-- **Terminal 5** Load Desired DS and robot/DS visualization in RViz:
+- **Terminal 5** Once the ports are open, run the yarp2ros publisher:
    ```bash
       $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
    ```
