@@ -25,7 +25,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
 
 3. In your catkin src directory clone the repository
    ```bash
-      $ git clone -b nadia https://github.com/epfl-lasa/icub-ds-walking
+      $ git clone https://github.com/epfl-lasa/icub-ds-walking
    ```
    * wstool gets all other git repository dependencies, after the following steps you should see extra catkin 
    packages in your src directory.
