@@ -65,7 +65,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```
    - Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
    
-- **Terminal 5** Load the DS that you want the robot's CoM motion to follow:
+- **Terminal 6** Load the DS that you want the robot's CoM motion to follow:
    ```bash
       $ roslaunch icub-ds-motion load_DScontroller.launch 
    ```
