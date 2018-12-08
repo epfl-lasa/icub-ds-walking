@@ -80,7 +80,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
   	# - iCub-Linear-Loco
   	# - iCub-C-Loco
    ```
-   These are the names of the ```.yml``` files that should be stored in this folder: ```~/ds_motion_generator/config/learned_DS/lpvDS/```.
+   These are the names of the ```.yml``` files that should be stored in this folder: ```~/ds_motion_generator/config/learned_DS/lpvDS/```, containing all of the DS parameters.
 
 #### Testing different walking commands
 We currently have 2 different ways of generating desired CoM velocity (v<sub>x</sub>, v<sub>y</sub>, w<sub>z</sub>). These types and their parameters can be defined in the config file: ``BalanceWalkingController_ROS.ini`` like so,
