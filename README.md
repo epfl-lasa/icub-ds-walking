@@ -78,7 +78,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
 	# Example Options:
   	# - iCub-Line-Loco
   	# - iCub-Linear-Loco
-  	# - iCub-C-Loco
+  	# - iCub-Cshape-Loco
    ```
    These are the names of the ```.yml``` files that should be stored in this folder: ```~/ds_motion_generator/config/learned_DS/lpvDS/```, containing all of the DS parameters.
 
