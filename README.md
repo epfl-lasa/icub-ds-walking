@@ -25,13 +25,13 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
 
 3. In your catkin src directory clone the repository
    ```bash
-      $ git clone -b nadia https://github.com/epfl-lasa/icub-ds-walking
+      $ git clone https://github.com/epfl-lasa/icub-ds-walking
    ```
    * wstool gets all other git repository dependencies, after the following steps you should see extra catkin 
    packages in your src directory.
    ```bash
       $  wstool init
-      $  wstool merge icub-ds-walking/dependencies.rosinstall && wstool up 
+      $  wstool merge icub-ds-walking/icub-ds-motion/dependencies.rosinstall && wstool up 
       $  wstool merge ds_motion_generator/dependencies.rosinstall && wstool up 
    ```
    * Query and installs all libraries and packages 
@@ -51,9 +51,9 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```bash
       $ gazebo 
    ```
-- **Terminal 3** Launch roscore and visualization of CoM and DS in Rviz: 
+- **Terminal 3** Launch roscore and visualization of CoM and DS in Rviz (this could be in another PC): 
    ```bash
-      $ roslaunch icub-ds-motion ds_visualization.launch
+      $ roslaunch icub-ds-motion icub_visualization.launch
    ```
 - **Terminal 4** Run the walking controller as follows : 
    ```bash
@@ -64,6 +64,23 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
       $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
    ```
    - Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
+   
+- **Terminal 6** Load the DS that you want the robot's CoM motion to follow (this could be in another PC):
+   ```bash
+      $ roslaunch icub-ds-motion load_DScontroller.launch 
+   ```
+   To define which DS you want to load you can modify the launch file:
+   ```xml
+   # Load DS Motion Generator
+	<include file="$(find icub-ds-motion)/launch/load_lpvDS_motionGenerator.launch">
+		<arg name="DS_name" value="iCub-Line-Loco"/>
+	</include>
+	# Example Options:
+  	# - iCub-Line-Loco
+  	# - iCub-Linear-Loco
+  	# - iCub-Cshape-Loco
+   ```
+   These are the names of the ```.yml``` files that should be stored in this folder: ```~/ds_motion_generator/config/learned_DS/lpvDS/```, containing all of the DS parameters.
 
 #### Testing different walking commands
 We currently have 2 different ways of generating desired CoM velocity (v<sub>x</sub>, v<sub>y</sub>, w<sub>z</sub>). These types and their parameters can be defined in the config file: ``BalanceWalkingController_ROS.ini`` like so,
@@ -88,7 +105,7 @@ The implemented DS is of the form <img src="https://github.com/epfl-lasa/biped-w
    The angular velocity <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_z.gif"> is defined with the following equation: <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_eq.gif">, where:  
     
    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif">:  Current Rotation matrix of the robot's CoM in world reference frame  
-   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R_d.gif">: Desired Rotation matrix of the robot's CoM in world reference frame, computed by aligning R with the direction of motion given by the DS <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/ds_dir.gif">  
+   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R_d.gif">: Desired Rotation matrix of the robot's CoM in world reference frame, computed by aligning <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif"> with the direction of motion given by the DS <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/ds_dir.gif">  
    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_skew.gif">: The skew-symmetric matrix representing the angular velocity vector <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega.gif">  
 
 2. Desired Velocity will be generated via a non-linear DS learned from demonstrations: ``DSType		1``. The paramaters of this DS should be defined in.. launch file
