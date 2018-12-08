@@ -154,30 +154,44 @@ include_directories(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
-
-set(SRC_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/src")
-set(HEADERS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/include/")
-
-set(HEADERS    ${HEADERS_FOLDER}/ros2yarp_data_streamer.h)
-set(SOURCES    ${SRC_FOLDER}/ros2yarp_data_streamer.cpp)
-
-add_library(ros2yarp_data_streamer ${HEADERS} ${SOURCES})
-target_link_libraries(ros2yarp_data_streamer ${catkin_LIBRARIES} ${YARP_LIBRARIES})
-
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${catkin_INCLUDE_DIRS})
 include_directories(${EIGEN3_INCLUDE_DIR})
 include_directories(${YARP_INCLUDE_DIRS})
 
 
-add_executable(ros2yarp_data_node ${SRC_FOLDER}/ros2yarp_data_streamer_node.cpp ${HEADERS})              
+
+set(SRC_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/src")
+set(HEADERS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/include/")
+
+set(HEADERS_DATA    ${HEADERS_FOLDER}/ros2yarp_data_streamer.h)
+set(SOURCES_DATA    ${SRC_FOLDER}/ros2yarp_data_streamer.cpp)
+
+add_library(ros2yarp_data_streamer ${HEADERS_DATA} ${SOURCES_DATA})
+target_link_libraries(ros2yarp_data_streamer ${catkin_LIBRARIES} ${YARP_LIBRARIES})
+
+add_executable(ros2yarp_data_node ${SRC_FOLDER}/ros2yarp_data_streamer_node.cpp ${HEADERS_DATA})              
 target_link_libraries(ros2yarp_data_node ros2yarp_data_streamer ${catkin_LIBRARIES} ${YARP_LIBRARIES})
+
+
+set(HEADERS_DS    ${HEADERS_FOLDER}/ros2yarp_DS_streamer.h)
+set(SOURCES_DS    ${SRC_FOLDER}/ros2yarp_DS_streamer.cpp)
+
+add_library(ros2yarp_DS_streamer ${HEADERS_DS} ${SOURCES_DS})
+target_link_libraries(ros2yarp_DS_streamer ${catkin_LIBRARIES} ${YARP_LIBRARIES})
+
+add_executable(ros2yarp_DS_node ${SRC_FOLDER}/ros2yarp_DS_streamer_node.cpp ${HEADERS_DS})              
+target_link_libraries(ros2yarp_DS_node ros2yarp_DS_streamer ${catkin_LIBRARIES} ${YARP_LIBRARIES})
 
 
 ### ADD Nodes that use the library
 add_dependencies(ros2yarp_data_node 
 	${${PROJECT_NAME}_EXPORTED_TARGETS} 
 	${catkin_EXPORTED_TARGETS}
+${PROJECT_NAME}_gencfg)
+
+add_dependencies(ros2yarp_DS_node 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS} 
+  ${catkin_EXPORTED_TARGETS}
 ${PROJECT_NAME}_gencfg)
 
 #############
