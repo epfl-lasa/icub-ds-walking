@@ -73,7 +73,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
 
 - **Terminal 7** Load the DS that you want the robot's CoM motion to follow (this could be in another PC):
    ```bash
-      $ roslaunch icub-ds-motion icub_visualization.launch 
+      $ roslaunch icub-ds-motion icubDS_visualization.launch
    ```
    To define which DS you want to load you can modify the launch file:
    ```xml
