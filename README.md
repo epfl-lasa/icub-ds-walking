@@ -55,17 +55,7 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```bash
       $ roslaunch icub-ds-motion icub_visualization.launch
    ```
-- **Terminal 4** Run the walking controller as follows : 
-   ```bash
-      $ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
-   ```
-- **Terminal 5** Once the ports are open, run the yarp2ros publisher:
-   ```bash
-      $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
-   ```
-   - Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
-   
-- **Terminal 6** Load the DS that you want the robot's CoM motion to follow (this could be in another PC):
+- **Terminal 4** Load the DS that you want the robot's CoM motion to follow (this could be in another PC):
    ```bash
       $ roslaunch icub-ds-motion load_DScontroller.launch 
    ```
@@ -79,9 +69,23 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
   	# - iCub-Line-Loco
   	# - iCub-Linear-Loco
   	# - iCub-Cshape-Loco
-   ```
+   ```   
    These are the names of the ```.yml``` files that should be stored in this folder: ```~/ds_motion_generator/config/learned_DS/lpvDS/```, containing all of the DS parameters.
 
+- **Terminal 5** Load the ROS-to-Yarp Streamer (should be in same PC as yarp-controller):
+   ```bash
+      $ roslaunch ros2yarp_data_streamer ros2yarp_DS_streamer.launch
+   ```
+- **Terminal 6** Run the walking controller as follows : 
+   ```bash
+      $ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
+   ```
+- **Terminal 7** Once the ports are open, run the yarp2ros publisher:
+   ```bash
+      $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
+   ```
+   - Name of the robot should be the same as the one defined in ```~/biped-walking-controller/config/BalanceWalkingController_ROS.ini```
+      
 #### Testing different walking commands
 We currently have 2 different ways of generating desired CoM velocity (v<sub>x</sub>, v<sub>y</sub>, w<sub>z</sub>). These types and their parameters can be defined in the config file: ``BalanceWalkingController_ROS.ini`` like so,
 ```
