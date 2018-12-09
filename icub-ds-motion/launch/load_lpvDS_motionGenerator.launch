@@ -8,6 +8,7 @@
   # - iCub-Linear1-Loco
   # - iCub-Linear2-Loco
   # - iCub-Cshape-Loco
+  # - iCub-CshapeRotated-Loco
 
 # Things to Know!
 # input_topic name should contain          -- geometry_msgs::Pose
