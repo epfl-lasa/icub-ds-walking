@@ -39,6 +39,8 @@ class ros2yarp_DS_streamer
 		ros::NodeHandle nh_;
 		// Rate of the run loop
 		ros::Rate loop_rate_;
+		bool got_msg_vel_;
+		bool got_msg_attr_;
 
 		// moduleName
 		std::string robot_name_;

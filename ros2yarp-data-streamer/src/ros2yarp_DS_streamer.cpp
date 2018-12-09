@@ -34,9 +34,16 @@ ros2yarp_DS_streamer::ros2yarp_DS_streamer(ros::NodeHandle &n, double frequency,
 	DesCoMAttractorPort_.open(DesCoMAttractorPortName_.c_str());
 
 	// initilize the pose vectors to zero
-	DesiredCoMVelocity_ = 0.0;
-	DesiredCoMAttractor_ = 0.0;
-	
+	// DesiredCoMVelocity_ = 0.0;
+	DesiredCoMVelocity_[0] = 0.0001;
+	DesiredCoMVelocity_[1] = 0;
+	DesiredCoMVelocity_[2] = 0;
+
+	DesiredCoMAttractor_[0] = 4.0;
+	DesiredCoMAttractor_[1] = 0.0;
+
+	got_msg_vel_  = false;
+    got_msg_attr_ = false;	
 }
 
 ros2yarp_DS_streamer::~ros2yarp_DS_streamer()
@@ -61,6 +68,8 @@ void ros2yarp_DS_streamer::desired_DS_CoM_velocity_callback(const geometry_msgs:
 	// DesiredCoMVelocity_[4] = msg->angular.y;	
 	// DesiredCoMVelocity_[5] = msg->angular.z;	
 
+	got_msg_vel_ = true;
+
 }
 
 void ros2yarp_DS_streamer::desired_DS_CoM_attractor_callback(const geometry_msgs::PointStampedConstPtr msg) 
@@ -68,7 +77,8 @@ void ros2yarp_DS_streamer::desired_DS_CoM_attractor_callback(const geometry_msgs
 	// position
 	DesiredCoMAttractor_[0] = msg->point.x;
 	DesiredCoMAttractor_[1] = msg->point.y;
-
+	// ROS_INFO_STREAM("DS desired attractor x: " << DesiredCoMAttractor_[0] << " y: "<< DesiredCoMAttractor_[1] <<  std::endl);
+	got_msg_attr_ = true;
 }
 
 
@@ -76,7 +86,7 @@ void ros2yarp_DS_streamer::desired_DS_CoM_attractor_callback(const geometry_msgs
 void ros2yarp_DS_streamer::run() 
 {
 
-	ROS_INFO("Running the ros2yarp_DS_streamer  loop ..............");
+	ROS_INFO("Running the ros2yarp_DS_streamer");
 
 	bool stream = true;
 
@@ -89,8 +99,8 @@ void ros2yarp_DS_streamer::run()
 
 		// assinging the pose values to the ports
 		// ---------------------------------------
-		output_DesCoMVelocity  		=	DesiredCoMVelocity_; 
-		output_DesCoMAttractor  		=	DesiredCoMAttractor_; 
+		output_DesCoMVelocity   =	DesiredCoMVelocity_; 
+		output_DesCoMAttractor  =	DesiredCoMAttractor_; 
 
 		// write the data to the port
 		// --------------------------
