@@ -7,4 +7,14 @@
 	<node name="robot_viz" pkg="icub-ds-motion" type="robot_viz.py"/>
 	<node name="trajectory_viz" pkg="icub-ds-motion" type="trajectory_viz.py"/>	
 
+
+	<include file="$(find icub-ds-motion)/launch/load_lpvDS_motionGenerator.launch">
+		<arg name="DS_name" value="iCub-Linear2-Loco"/>
+	</include>
+	# Example Options:
+  	# - iCub-Line-Loco
+  	# - iCub-Linear1-Loco
+  	# - iCub-Linear2-Loco
+  	# - iCub-Cshape-Loco
+
 </launch>

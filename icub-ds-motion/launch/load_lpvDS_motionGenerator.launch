@@ -1,11 +1,12 @@
 <?xml version="1.0" ?>
 <launch>
 # You can fill in here the name of your DS or pass it through the command line or another launch file!
- <arg name="DS_name"       default="iCub-Linear-Loco"/>
+ <arg name="DS_name"       default="iCub-Linear1-Loco"/>
  <arg name="viz_DS_path"   default="true"/>
   # Example Options:
   # - iCub-Line-Loco
-  # - iCub-Linear-Loco
+  # - iCub-Linear1-Loco
+  # - iCub-Linear2-Loco
   # - iCub-Cshape-Loco
 
 # Things to Know!

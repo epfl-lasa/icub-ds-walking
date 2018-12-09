@@ -1,21 +1,16 @@
 <?xml version="1.0"?>
 <launch>
 	
-	# Load yarp2ros publisher
-	# ...
 
 	# Load DS Motion Generator
 	<include file="$(find icub-ds-motion)/launch/load_lpvDS_motionGenerator.launch">
-		<arg name="DS_name" value="iCub-Line-Loco"/>
+		<arg name="DS_name" value="iCub-Linear1-Loco"/>
 	</include>
 	# Example Options:
   	# - iCub-Line-Loco
-  	# - iCub-Linear-Loco
+  	# - iCub-Linear1-Loco
+  	# - iCub-Linear2-Loco
   	# - iCub-Cshape-Loco
-
-
-  	# Load ros2yarp streamer
-  	# ...
 
 	
 </launch>
