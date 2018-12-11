@@ -5,7 +5,11 @@ DS-based motion planning for the iCub using the reactive omnidirectional walking
 <p align="center">
 <img src="https://github.com/epfl-lasa/icub-ds-walking/blob/master/imgs/iCub-Motion-Planning.png"></>
 
-
+The desired linear velocity of the Center-of-Mass (CoM) of the biped is computed the a DS f_x. In it's current form the angular velocity <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_z.gif"> is defined with the following equation: <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_eq.gif">, where:  
+    
+   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif">:  Current Rotation matrix of the robot's CoM in world reference frame  
+   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R_d.gif">: Desired Rotation matrix of the robot's CoM in world reference frame, computed by aligning <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif"> with the direction of motion given by the DS <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/ds_dir.gif">  
+   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_skew.gif">: The skew-symmetric matrix representing the angular velocity vector <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega.gif">  
 
 
 ### System Requirements
@@ -116,12 +120,6 @@ The implemented DS is of the form <img src="https://github.com/epfl-lasa/biped-w
    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/CoM.gif">: CoM position
    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/attractor.gif">: Attractor (target)
    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/kappa.gif">: DS gain     
-
-   The angular velocity <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_z.gif"> is defined with the following equation: <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_eq.gif">, where:  
-    
-   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif">:  Current Rotation matrix of the robot's CoM in world reference frame  
-   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R_d.gif">: Desired Rotation matrix of the robot's CoM in world reference frame, computed by aligning <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif"> with the direction of motion given by the DS <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/ds_dir.gif">  
-   - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_skew.gif">: The skew-symmetric matrix representing the angular velocity vector <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega.gif">  
 
 2. Desired Velocity will be generated via a non-linear DS learned from demonstrations: ``DSType		1``. The paramaters of this DS should be defined in.. launch file
 
