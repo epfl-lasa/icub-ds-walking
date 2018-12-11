@@ -1,5 +1,12 @@
 ## icub-ds-walking
-DS-based motion planning for the iCub using the reactive omnidirectional walking controller proposed in [1] with DS learned from demonstrations with the LPV-DS approach [2] and the LAGS-DS approach [3].
+DS-based motion planning for the iCub using the reactive omnidirectional walking controller proposed in [1] guided by a DS learned from demonstrations with the 1) LPV-DS approach [2] and the 2) LAGS-DS approach [3]. The entire motion planning architecure is illustrated in the following figure:
+
+
+<p align="center">
+<img src="https://github.com/epfl-lasa/icub-ds-walking/blob/master/imgs/iCub-Motion-Planning.png"></>
+
+
+
 
 ### System Requirements
 Ubuntu 16.04, Gazebo7, ROS-Kinetic, YARP
