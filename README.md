@@ -11,6 +11,7 @@ The desired linear velocity of the Center-of-Mass (CoM) of the biped is computed
    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R_d.gif">: Desired Rotation matrix of the robot's CoM in world reference frame, computed by aligning <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/R.gif"> with the direction of motion given by the DS <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/ds_dir.gif">  
    - <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega_skew.gif">: The skew-symmetric matrix representing the angular velocity vector <img src="https://github.com/epfl-lasa/biped-walking-controller/blob/nadia-DS/img/omega.gif">  
 
+**TODO: Learn orientation dynamics from demonstration as well.**
 
 ### System Requirements
 Ubuntu 16.04, Gazebo7, ROS-Kinetic, YARP
