@@ -61,14 +61,12 @@ void ros2yarp_DS_streamer::desired_DS_CoM_velocity_callback(const geometry_msgs:
 	DesiredCoMVelocity_[1] = msg->linear.y;
 	DesiredCoMVelocity_[2] = msg->linear.z;
 
-	// ROS_INFO_STREAM("DS desired velocity v_x: " << DesiredCoMVelocity_[0] << " v_y: "<< DesiredCoMVelocity_[1]  << " v_z: "<< DesiredCoMVelocity_[2] << std::endl);
+	 // ROS_INFO_STREAM("DS desired velocity v_x: " << DesiredCoMVelocity_[0] << " v_y: "<< DesiredCoMVelocity_[1]  << " v_z: "<< DesiredCoMVelocity_[2] << std::endl);
 
 	// orientation (for when I implemented the learned orientation dynamics)
 	// DesiredCoMVelocity_[3] = msg->angular.x;	
 	// DesiredCoMVelocity_[4] = msg->angular.y;	
 	// DesiredCoMVelocity_[5] = msg->angular.z;	
-
-	got_msg_vel_ = true;
 
 }
 
@@ -94,7 +92,7 @@ void ros2yarp_DS_streamer::run()
 	{
 
 		//
-		yarp::sig::Vector &output_DesCoMVelocity = DesCoMVelocityPort_.prepare();
+		yarp::sig::Vector &output_DesCoMVelocity  = DesCoMVelocityPort_.prepare();
 		yarp::sig::Vector &output_DesCoMAttractor = DesCoMAttractorPort_.prepare();
 
 		// assinging the pose values to the ports
