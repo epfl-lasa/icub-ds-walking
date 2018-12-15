@@ -9,7 +9,7 @@
 
 
 	<include file="$(find icub-ds-motion)/launch/load_lpvDS_motionGenerator.launch">
-		<arg name="DS_name" value="iCub-CshapeRotated-Loco"/>
+		<arg name="DS_name" value="iCub-Linear2-Loco"/>
 	</include>
 	# Example Options:
   	# - iCub-Line-Loco
