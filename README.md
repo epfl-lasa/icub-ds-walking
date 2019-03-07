@@ -76,6 +76,10 @@ To avoid any issues, we recommend to start with a clean Ubuntu 16.04 installatio
    ```bash
       $ ./BipedWalkingGrasping_ROS --from ../config/BalanceWalkingController_ROS.ini
    ```
+   OR
+   ```bash
+      $ ./BipedWalkingGrasping_LPVDS --from ../config/BalanceWalkingController_LPVDS.ini
+   ```
 - **Terminal 6** Once the ports are open, run the yarp2ros publisher:
    ```bash
       $ rosrun yarp2ros_data_publisher yarp2ros_CoM_node --robot icubSim
