@@ -1,6 +1,23 @@
 <?xml version="1.0"?>
 <launch>
 
+  	<arg name="use_lags" default="false" />
+    <arg name="DS_name_" default="iCub-Narrow-Passage" />
+    <!-- <arg name="DS_name_" default="iCub-Object-Conveyor" /> -->
+	######### Example Options for LPV-DS #########
+  	# - iCub-Line-Loco
+  	# - iCub-Linear1-Loco
+  	# - iCub-Linear2-Loco
+  	# - iCub-Cshape-Loco
+  	# - iCub-CshapeRotated-Loco
+  	# - coManip-DS-0
+  	# - coManip-DS-1
+  	# - iCub-Narrow-Passage  	
+  	# - iCub-Object-Conveyor
+  	######### Example Options for LAGS-DS #########
+  	# - iCub-Narrow-Passage-LAGS  	
+  	# - iCub-Object-Conveyor-LAGS  	
+
 	<!-- RVIZ STUFF -->
 	<node type="rviz" name="rviz" pkg="rviz" args="-d $(find icub-ds-motion)/config/rviz/icub.rviz" />
 	<node name="static_tf_pub_world_to_gazebo_world" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0  0 0 0 1 world gazebo_world" />
@@ -8,15 +25,18 @@
 	<node name="trajectory_viz" pkg="icub-ds-motion" type="trajectory_viz.py"/>	
 
 
-	<include file="$(find icub-ds-motion)/launch/load_lpvDS_motionGenerator.launch">
-		<arg name="DS_name" value="coManip-DS-1"/>
-	</include>
-	# Example Options:
-  	# - iCub-Line-Loco
-  	# - iCub-Linear1-Loco
-  	# - iCub-Linear2-Loco
-  	# - iCub-Cshape-Loco
-  	# - iCub-CshapeRotated-Loco
-  	# - coManip-DS-1
+  	<group if="$(arg use_lags)">
+    	<include file="$(find icub-ds-motion)/launch/load_lagsDS_motionGenerator.launch">
+			<arg name="DS_name" value="$(arg DS_name_)-LAGS"/>
+		</include>
+  	</group>
 
+  	<group unless="$(arg use_lags)">
+    	<include file="$(find icub-ds-motion)/launch/load_lpvDS_motionGenerator.launch">
+			<arg name="DS_name" value="$(arg DS_name_)"/>
+		</include>
+  	</group>
+
+	
+	
 </launch>
